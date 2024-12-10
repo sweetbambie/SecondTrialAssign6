@@ -24,8 +24,9 @@ onMounted(async () => {
 <template>
   <div v-if="response" class="movie-detail">
     <h1 class="movie-title">{{ response.original_title }}</h1>
-    <button v-if='!store.cart.has(response.original_title)'
-      @click="store.cart.set(route.params.id, { title: response.original_title, url: response.poster_path })"
+  
+    <button v-if='!store.cart.has(route.params.id)'
+      @click="store.addToCart(route.params.id, { title: response.original_title, url: response.poster_path })"
       class="movie-site">
       Buy
     </button>

@@ -11,6 +11,7 @@ import { RouterLink } from 'vue-router';
           <li><RouterLink to="/register" class="button register">Register</RouterLink></li>
           <li><RouterLink to="/login" class="button login">Login</RouterLink></li>
           <li><RouterLink to="/cart" class="button login">Cart</RouterLink></li>
+          <li><RouterLink to="/setting" class="button login">Setting</RouterLink></li>
         </div>
       </ul>
     </nav>
