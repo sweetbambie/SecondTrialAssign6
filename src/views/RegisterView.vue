@@ -16,11 +16,10 @@ const validateForm = (event) => {
       password: store.password,
     });
 
-    console.log('Store data after registration:', {
-      email: store.email,
-      password: store.password,
-    });
-
+    // console.log('Store data after registration:', {
+    //   email: store.email,
+    //   password: store.password,
+    // });
 
     alert('Form submitted successfully!');
   }
