@@ -1,58 +1,45 @@
 <template>
-  <h2>Account Information</h2>
-  <form @submit="handleSubmit">
-    <input v-model="store.firstName" placeholder="First Name" class="input-field" />
-    <input v-model="store.lastName" placeholder="Last Name" class="input-field" />
-    <input type="email" placeholder="Email" class="input-field" v-model="store.email" required />
-    <input type="password" placeholder="Password" class="input-field" v-model="store.password" required />
-    <button type="submit" class="register">Update Information</button>
-  </form>
+  <div>
+    <h1>User Profile</h1>
+    <form @submit.prevent="updateProfile">
+      <label for="firstName">First Name:</label>
+      <input type="text" id="firstName" v-model="firstName" /><br /><br />
+      <label for="lastName">Last Name:</label>
+      <input type="text" id="lastName" v-model="lastName" /><br /><br />
+      <label for="email">Email:</label>
+      <input type="email" id="email" v-model="email" /><br /><br />
+      <label for="password">Password:</label>
+      <input type="password" id="password" v-model="password" readonly /><br /><br />
+      <button type="submit">Save Changes</button>
+    </form>
+  </div>
+</template>
 
-<script setup>
-import { ref, onMounted } from 'vue';
-import { useStore } from '../store'; 
+<script>
+import { useRegistrationStore } from '../store';
 
-const store = useStore();
-const formStatus = ref(null);
+export default {
+  setup() {
+    const registrationStore = useRegistrationStore();
 
-onMounted(() => {
-  // Assuming the store is already populated with the user's data from a previous login or API call
-  console.log("Current User Info:", store.firstName, store.lastName, store.email);
-});
+    // Bind store values to the form inputs
+    const { firstName, lastName, email, password, persistData } = registrationStore;
 
-// Handle form submission
-const handleSubmit = (event) => {
-  event.preventDefault(); // Prevent default form submission
-
-  // Validate the form data (for example, check if passwords match)
-  if (store.password !== store.rePassword) {
-    formStatus.value = {
-      success: false,
-      message: 'Passwords do not match!',
+    // Method to save changes
+    const updateProfile = () => {
+      // Persist updated data to localStorage
+      registrationStore.persistData();
+      alert('Profile updated successfully!');
     };
-    return;
-  }
 
-  // Here you can make an API call or store the updated data
-  // For example, saving the updated data to a backend API
-  // Assuming a method saveAccountInfo exists in your store or API
-
-  // You can call the store's action to save the updated data (e.g., in Pinia)
-  store.updateAccountInfo({
-    firstName: store.firstName,
-    lastName: store.lastName,
-    email: store.email,
-    password: store.password,
-  }).then(() => {
-    formStatus.value = {
-      success: true,
-      message: 'Your information has been updated successfully!',
+    return {
+      firstName,
+      lastName,
+      email,
+      password,
+      updateProfile, // This method is triggered when the form is submitted
     };
-  }).catch((error) => {
-    formStatus.value = {
-      success: false,
-      message: 'There was an error updating your information. Please try again.',
-    };
-  });
-}
+  },
+};
 </script>
+
