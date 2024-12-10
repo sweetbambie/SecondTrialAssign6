@@ -42,23 +42,47 @@ export const useRegistrationStore = defineStore('registration', () => {
     password,
     rePassword,
     setRegistrationData,
+    persistData,
   };
 });
 
 export const useStore = defineStore('store', () => {
   const cart = ref(new Map());
 
+  const persistData = () => {
+    const s = JSON.stringify(Array.from(cart.value.entries()));
+    console.log("Saving cart ", s)
+    localStorage.setItem('cart', JSON.stringify(Array.from(cart.value.entries())));
+  }
+
+  const loadData = () => {
+    const storedCart = localStorage.getItem('cart');
+    if (storedCart) {
+      const parsedCart = JSON.parse(storedCart);
+      cart.value.clear();
+      parsedCart.forEach(([key, value]) => {
+        cart.value.set(key, value);
+      });
+    }
+  }
+
   function addToCart(id, movieData) {
-    cart.set(id, movieData);
+    cart.value.set(id, movieData);
+    persistData()
   }
 
   function removeFromCart(id) {
-    cart.delete(id);
+    cart.value.delete(id);
+    persistData()
   }
+
+  onMounted(() => {
+      loadData();
+  });
 
   return {
     cart,
     addToCart,
-    removeFromCart
+    removeFromCart,
   };
 });
