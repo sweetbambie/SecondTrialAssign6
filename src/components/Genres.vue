@@ -103,8 +103,8 @@ select {
   display: block;
   margin-top: 20px;
   padding: 10px 20px;
-  background-color: hotpink;
-  color: white;
+  background-color: rgb(255, 255, 255);
+  color:hotpink;
   border: none;
   border-radius: 5px;
   cursor: pointer;
