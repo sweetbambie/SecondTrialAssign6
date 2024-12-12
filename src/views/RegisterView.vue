@@ -1,6 +1,7 @@
 <script setup>
 import { useRegistrationStore } from '../store';
 import { useRouter } from 'vue-router';
+import Header from '../components/Header.vue'
 
 const store = useRegistrationStore();
 const router = useRouter();

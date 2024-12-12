@@ -2,6 +2,7 @@
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
 import { useRegistrationStore } from '../store';
+import Header from '../components/Header.vue'
 
 const store = useRegistrationStore();
 const email = ref('');
@@ -10,20 +11,17 @@ const router = useRouter();
 
 const handleLogin = () => {
   if (email.value === store.email && password.value === store.password) {
-    router.push("/movies"); 
+    router.push("/movies");
   } else {
-    alert('Login incorrect:(');
+    alert('Login incorrect :(');
   }
 };
 </script>
 
 <template>
+<Header />
   <div class="hero">
     <div class="overlay">
-      <div class="navbar">
-        <li class="logo">Feminine Flix</li>
-        <RouterLink to="/register" class="button register">Register</RouterLink>
-      </div>
       <div class="form-container">
         <h2>Login to Your Account</h2>
         <form @submit.prevent="handleLogin">

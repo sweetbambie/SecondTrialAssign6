@@ -10,14 +10,14 @@ const store = useStore();
         <div class="item" v-for="([key, value]) in store.cart">
             <img :src="`https://image.tmdb.org/t/p/w500${value.url}`" />
             <h1>{{ value.title }}</h1>
-            <button @click="store.cart.delete(key)">Remove</button>
+            <button @click="store.removeFromCart(key)">Remove</button>
         </div>
     </div>
 </template>
 
 <style scoped>
 h1 {
-    color: #e50914;
+    color: hotpink;
     text-align: center;
 }
 
@@ -25,7 +25,7 @@ button {
     display: inline-block;
     margin-bottom: 20px;
     padding: 10px 15px;
-    background-color: #e50914;
+    background-color: hotpink;
     color: white;
     text-decoration: none;
     border-radius: 5px;

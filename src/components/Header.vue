@@ -8,8 +8,18 @@ import { RouterLink } from 'vue-router';
       <ul class="navlist">
         <li class="logo">Feminine Flix</li>
         <div class="buttons">
-          <li><RouterLink to="/register" class="button register">Register</RouterLink></li>
-          <li><RouterLink to="/login" class="button login">Login</RouterLink></li>
+          <li v-if="$route.path === '/' || $route.path === '/register'">
+            <RouterLink to="/login" class="button login">Login</RouterLink>
+          </li>
+          <li v-if="$route.path === '/' || $route.path === '/login'">
+            <RouterLink to="/register" class="button register">Register</RouterLink>
+          </li>
+          <li v-if="$route.path === '/movies'">
+            <RouterLink to="/cart" class="button cart">Cart</RouterLink>
+          </li>
+          <li v-if="$route.path === '/movies'" >
+            <RouterLink to="/setting" class="button setting">Setting</RouterLink>
+          </li>
         </div>
       </ul>
     </nav>
@@ -39,7 +49,6 @@ import { RouterLink } from 'vue-router';
 
 .logo {
   font-size: 2rem;
-  /* float: left !important; */
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-style: italic;
   font-weight: bold;
