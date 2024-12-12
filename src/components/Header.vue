@@ -1,5 +1,8 @@
 <script setup>
 import { RouterLink } from 'vue-router';
+import { useRegistrationStore } from '../store';
+
+const registrationStore = useRegistrationStore();
 </script>
 
 <template>
@@ -29,6 +32,9 @@ import { RouterLink } from 'vue-router';
           <li v-if="$route.path === '/login' || $route.path === '/register'">
             <RouterLink to="/" class="button setting">Home</RouterLink>
           </li>
+          <li v-if="$route.path === '/movies' || $route.path === '/setting'" class ='email'>
+            <h1>{{ `Hello ${registrationStore.email}!` }}</h1>
+          </li>
         </div>
       </ul>
     </nav>
@@ -48,12 +54,7 @@ import { RouterLink } from 'vue-router';
 }
 
 .navlist li {
-  float: right;
-}
-
-.navlist li a {
-  padding: 8px 16px;
-  text-decoration: none;
+  /* Remove float to allow flexbox to handle the layout */
 }
 
 .logo {
@@ -67,6 +68,9 @@ import { RouterLink } from 'vue-router';
 
 .buttons {
   display: flex;
+  align-items: center; /* Vertically align buttons and email */
+  justify-content: flex-start; /* Align items to the left */
+  gap: 10px; /* Optional: Add some space between buttons */
 }
 
 .button {
@@ -76,5 +80,13 @@ import { RouterLink } from 'vue-router';
   cursor: pointer;
   margin: 0 4px;
   font-weight: bold;
+  display: inline-flex; /* Ensure buttons stay inline */
+  align-items: center;
+}
+
+.email {
+  font-size: 1rem;
+  margin-left: 20px; /* Add space between buttons and email */
+  display: inline-block; /* Ensure the email is inline with buttons */
 }
 </style>
