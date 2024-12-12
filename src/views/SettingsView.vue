@@ -9,7 +9,7 @@
       <label for="email">Email:</label>
       <input type="email" id="email" v-model="email" /><br /><br />
       <label for="password">Password:</label>
-      <input type="password" id="password" v-model="password" readonly /><br /><br />
+      <input type="text" id="password" v-model="password" readonly /><br /><br />
       <button type="submit">Save Changes</button>
     </form>
   </div>
@@ -22,12 +22,9 @@ export default {
   setup() {
     const registrationStore = useRegistrationStore();
 
-    // Bind store values to the form inputs
     const { firstName, lastName, email, password, persistData } = registrationStore;
 
-    // Method to save changes
     const updateProfile = () => {
-      // Persist updated data to localStorage
       registrationStore.persistData();
       alert('Profile updated successfully!');
     };
@@ -37,7 +34,7 @@ export default {
       lastName,
       email,
       password,
-      updateProfile, // This method is triggered when the form is submitted
+      updateProfile, 
     };
   },
 };

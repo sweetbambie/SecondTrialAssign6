@@ -1,8 +1,9 @@
 <script setup>
-import { ref } from 'vue';
 import { useRegistrationStore } from '../store';
+import { useRouter } from 'vue-router';
 
 const store = useRegistrationStore();
+const router = useRouter();
 
 const validateForm = (event) => {
   if (store.password.value !== store.rePassword.value) {
@@ -16,36 +17,24 @@ const validateForm = (event) => {
       password: store.password,
     });
 
-    // console.log('Store data after registration:', {
-    //   email: store.email,
-    //   password: store.password,
-    // });
-
-    alert('Form submitted successfully!');
+    router.push('/movies')
   }
 };
 </script>
 
 <template>
-  <div class="hero">
-    <div class="overlay">
-      <div class="navbar">
-        <li class="logo">Feminine Flix</li>
-        <RouterLink to="/login" class="button login">Login</RouterLink>
-      </div>
-      <div class="form-container">
-        <h2>Create an Account</h2>
-        <form @submit="validateForm">
-          <input type="text" placeholder="First Name" class="input-field" v-model="store.firstName" required />
-          <input type="text" placeholder="Last Name" class="input-field" v-model="store.lastName" required />
-          <input type="email" placeholder="Email" class="input-field" v-model="store.email" required />
-          <input type="password" placeholder="Password" class="input-field" v-model="store.password" required />
-          <input type="password" placeholder="Re-Enter Password" class="input-field" v-model="store.rePassword" required />
-          <button type="submit" class="register">Register</button>
-        </form>
-      </div>
+  <Header />
+  <div class="form-container">
+    <h2>Create an Account</h2>
+      <form @submit="validateForm">
+        <input type="text" placeholder="First Name" class="input-field" v-model="store.firstName" required />
+        <input type="text" placeholder="Last Name" class="input-field" v-model="store.lastName" required />
+        <input type="email" placeholder="Email" class="input-field" v-model="store.email" required />
+        <input type="password" placeholder="Password" class="input-field" v-model="store.password" required />
+        <input type="password" placeholder="Re-Enter Password" class="input-field" v-model="store.rePassword" required />
+        <button type="submit" class="register">Register</button>
+      </form>
     </div>
-  </div>
 </template>
 
 <style>

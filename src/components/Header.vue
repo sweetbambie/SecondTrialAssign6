@@ -1,5 +1,22 @@
-<script setup>
-import { RouterLink } from 'vue-router';
+<script>
+import { computed } from 'vue';
+import { useRoute } from 'vue-router';
+
+export default {
+  setup() {
+    // Get the current route using useRoute
+    const route = useRoute();
+
+    // Computed property to check if we're on the '/register' page
+    const isOnRegisterPage = computed(() => {
+      return route.path === '/register';
+    });
+
+    return {
+      isOnRegisterPage
+    };
+  }
+};
 </script>
 
 <template>
@@ -8,7 +25,7 @@ import { RouterLink } from 'vue-router';
       <ul class="navlist">
         <li class="logo">Feminine Flix</li>
         <div class="buttons">
-          <li><RouterLink to="/register" class="button register">Register</RouterLink></li>
+          <li v-if="!isOnRegisterPage"><RouterLink to="/register" class="button register">Register</RouterLink></li>
           <li><RouterLink to="/login" class="button login">Login</RouterLink></li>
           <li><RouterLink to="/cart" class="button login">Cart</RouterLink></li>
           <li><RouterLink to="/setting" class="button login">Setting</RouterLink></li>

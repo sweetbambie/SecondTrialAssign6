@@ -2,11 +2,13 @@
 import axios from "axios";
 import { ref, onMounted } from 'vue';
 import { useRouter } from "vue-router";
+import { useStore } from '../store';
 
 const props = defineProps(["genres"]);
 const router = useRouter();
 const selectedGenre = ref(28);
 const response = ref(null);
+const store = useStore();
 
 const genres = [
   { id: 12, genreName: 'Adventure' },
@@ -38,6 +40,14 @@ onMounted(async () => {
       <div v-for="movie in response.data.results" :key="movie.id" class="movie-card" @click="getMovieDetails(movie.id)">
         <img :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" alt="Movie Poster" class="movie-poster" />
         <p class="movie-title">{{ movie.title }}</p>
+        <button v-if='!store.cart.has(route.params.id)'
+          @click="store.addToCart(route.params.id, { title: response.original_title, url: response.poster_path })"
+          class="movie-site">
+          Buy
+        </button>
+        <button v-else>
+          Added
+        </button>
       </div>
     </div>
   </div>
