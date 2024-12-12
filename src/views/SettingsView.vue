@@ -52,7 +52,7 @@ const updateProfileHandler = (event) => {
       <label for="lastName">Last Name:</label>
       <input type="text" id="lastName" class="input-field" v-model="lastName" /><br /><br />
       <label for="email">Email:</label>
-      <input type="email" id="email" class="input-field" v-model="email" /><br /><br />
+      <input type="email" id="email" class="input-field" v-model="email" readonly/><br /><br />
       <label for="password">Password:</label>
       <input type="text" id="password" class="input-field" v-model="password" readonly /><br /><br />
       <button type="submit" class="button">Save Changes</button>
