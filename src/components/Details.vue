@@ -2,10 +2,10 @@
 import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import axios from 'axios';
-import { useStore } from '../store';
+// import { useStore } from '../store';
 
 const response = ref(null);
-const store = useStore();
+// const store = useStore();
 const route = useRoute();
 
 onMounted(async () => {
@@ -25,14 +25,14 @@ onMounted(async () => {
   <div v-if="response" class="movie-detail">
     <h1 class="movie-title">{{ response.original_title }}</h1>
   
-    <button v-if='!store.cart.has(route.params.id)'
+    <!-- <button v-if='!store.cart.has(route.params.id)'
       @click="store.addToCart(route.params.id, { title: response.original_title, url: response.poster_path })"
       class="movie-site">
       Buy
     </button>
     <button v-else>
       Added
-    </button>
+    </button> -->
     <p class="movie-overview">{{ response.overview }}</p>
     <p class="movie-release-date">Release Date: {{ response.release_date }}</p>
     <a class="movie-site" :href="response.homepage" target="_blank">Official Movie Site</a>

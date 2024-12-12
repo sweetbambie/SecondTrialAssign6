@@ -6,9 +6,10 @@ import { useStore } from '../store';
 
 const props = defineProps(["genres"]);
 const router = useRouter();
+const store = useStore();
+
 const selectedGenre = ref(28);
 const response = ref(null);
-const store = useStore();
 
 const genres = [
   { id: 12, genreName: 'Adventure' },
@@ -37,12 +38,13 @@ onMounted(async () => {
       <option v-for="genre of genres" :value="genre.id">{{ genre.genreName }}</option>
     </select>
     <div v-if="response" class="movie-list">
-      <div v-for="movie in response.data.results" :key="movie.id" class="movie-card" @click="getMovieDetails(movie.id)">
-        <img :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" alt="Movie Poster" class="movie-poster" />
-        <p class="movie-title">{{ movie.title }}</p>
-        <button v-if='!store.cart.has(route.params.id)'
-          @click="store.addToCart(route.params.id, { title: response.original_title, url: response.poster_path })"
-          class="movie-site">
+      <div v-for="movie in response.data.results" :key="movie.id" class="movie-card">
+        <div @click="getMovieDetails(movie.id)">
+          <img :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" alt="Movie Poster" class="movie-poster" />
+          <p class="movie-title">{{ movie.title }}</p>
+        </div>
+        <button v-if='!store.cart.has(movie.id)'
+          @click="store.addToCart(movie.id, { title: movie.title, url: movie.poster_path })" class="movie-site">
           Buy
         </button>
         <button v-else>
