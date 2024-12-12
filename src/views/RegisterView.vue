@@ -1,25 +1,26 @@
 <script setup>
 import { useRegistrationStore } from '../store';
 import { useRouter } from 'vue-router';
-import Header from '../components/Header.vue'
-import Footer from '../components/Footer.vue'
+import Header from '../components/Header.vue';
+import Footer from '../components/Footer.vue';
 
 const store = useRegistrationStore();
 const router = useRouter();
 
 const validateForm = (event) => {
-  if (store.password !== store.rePassword) {
-    event.preventDefault(); 
+  if (store.password.value !== store.rePassword.value) {
+    event.preventDefault();
     alert('The passwords do not match. Please check and try again.');
   } else {
+
     store.setRegistrationData({
-      firstName: store.firstName,
-      lastName: store.lastName,
-      email: store.email,
-      password: store.password,
+      firstName: store.firstName.value,
+      lastName: store.lastName.value,
+      email: store.email.value,
+      password: store.password.value,
     });
 
-    router.push('/movies')
+    router.push('/movies');
   }
 };
 </script>
@@ -28,16 +29,16 @@ const validateForm = (event) => {
   <Header />
   <div class="form-container">
     <h2>Create an Account</h2>
-      <form @submit="validateForm">
-        <input type="text" placeholder="First Name" class="input-field" v-model="store.firstName" required />
-        <input type="text" placeholder="Last Name" class="input-field" v-model="store.lastName" required />
-        <input type="email" placeholder="Email" class="input-field" v-model="store.email" required />
-        <input type="password" placeholder="Password" class="input-field" v-model="store.password" required />
-        <input type="password" placeholder="Re-Enter Password" class="input-field" v-model="store.rePassword" required />
-        <button type="submit" class="register">Register</button>
-      </form>
-    </div>
-    <Footer />
+    <form @submit="validateForm">
+      <input type="text" placeholder="First Name" class="input-field" v-model="store.firstName" required />
+      <input type="text" placeholder="Last Name" class="input-field" v-model="store.lastName" required />
+      <input type="email" placeholder="Email" class="input-field" v-model="store.email" required />
+      <input type="password" placeholder="Password" class="input-field" v-model="store.password" required />
+      <input type="password" placeholder="Re-Enter Password" class="input-field" v-model="store.rePassword" required />
+      <button type="submit" class="register">Register</button>
+    </form>
+  </div>
+  <Footer />
 </template>
 
 <style>
@@ -92,38 +93,4 @@ const validateForm = (event) => {
   background-color: rgb(246, 151, 198);
   transform: scale(1.05);
 }
-
-/* .logo {
-  font-size: 2rem;
-  float: left !important;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  font-style: italic;
-  font-weight: bold;
-  margin-left: 8px;
-  color: hotpink;
-}
-
-.navbar .login {
-  background-color: hotpink;
-  color: white;
-  padding: 10px 20px;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: background-color 0.3s;
-}
-
-.navbar .login:hover {
-  background-color: rgb(246, 151, 198);
-}
-
-.navbar {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  padding: 20px;
-}
-
-.navbar h1 {
-  font-size: 2rem;
-} */
 </style>
