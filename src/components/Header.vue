@@ -33,7 +33,7 @@ const registrationStore = useRegistrationStore();
             <RouterLink to="/" class="button setting">Home</RouterLink>
           </li>
           <li v-if="$route.path === '/movies' || $route.path === '/setting'" class ='email'>
-            <h1>{{ `Hello ${registrationStore.email}!` }}</h1>
+            <h1>{{ `Hello ${registrationStore.firstName}!` }}</h1>
           </li>
         </div>
       </ul>
@@ -53,10 +53,6 @@ const registrationStore = useRegistrationStore();
   justify-content: space-between;
 }
 
-.navlist li {
-  /* Remove float to allow flexbox to handle the layout */
-}
-
 .logo {
   font-size: 2rem;
   font-family: Georgia, 'Times New Roman', Times, serif;
@@ -68,9 +64,9 @@ const registrationStore = useRegistrationStore();
 
 .buttons {
   display: flex;
-  align-items: center; /* Vertically align buttons and email */
-  justify-content: flex-start; /* Align items to the left */
-  gap: 10px; /* Optional: Add some space between buttons */
+  align-items: center;
+  justify-content: flex-start; 
+  gap: 10px; 
 }
 
 .button {
@@ -80,13 +76,13 @@ const registrationStore = useRegistrationStore();
   cursor: pointer;
   margin: 0 4px;
   font-weight: bold;
-  display: inline-flex; /* Ensure buttons stay inline */
+  display: inline-flex; 
   align-items: center;
 }
 
 .email {
   font-size: 1rem;
-  margin-left: 20px; /* Add space between buttons and email */
-  display: inline-block; /* Ensure the email is inline with buttons */
+  margin-left: 20px; 
+  display: inline-block; 
 }
 </style>
