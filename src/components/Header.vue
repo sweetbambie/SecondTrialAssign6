@@ -8,7 +8,7 @@ import { RouterLink } from 'vue-router';
       <ul class="navlist">
         <li class="logo">Feminine Flix</li>
         <div class="buttons">
-          <li v-if="$route.path === '/' || $route.path === '/register'">
+          <li v-if="$route.path === '/'">
             <RouterLink to="/login" class="button login">Login</RouterLink>
           </li>
           <li v-if="$route.path === '/' || $route.path === '/login'">
@@ -19,6 +19,12 @@ import { RouterLink } from 'vue-router';
           </li>
           <li v-if="$route.path === '/movies'" >
             <RouterLink to="/setting" class="button setting">Setting</RouterLink>
+          </li>
+          <li v-if="$route.path !== '/'" >
+            <RouterLink to="/" class="button setting">Logout</RouterLink>
+          </li>
+          <li v-if="$route.path === '/setting'" >
+            <RouterLink to="/movies" class="button setting">Movies</RouterLink>
           </li>
         </div>
       </ul>
