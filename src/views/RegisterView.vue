@@ -2,12 +2,13 @@
 import { useRegistrationStore } from '../store';
 import { useRouter } from 'vue-router';
 import Header from '../components/Header.vue'
+import Footer from '../components/Footer.vue'
 
 const store = useRegistrationStore();
 const router = useRouter();
 
 const validateForm = (event) => {
-  if (store.password.value !== store.rePassword.value) {
+  if (store.password !== store.rePassword) {
     event.preventDefault(); 
     alert('The passwords do not match. Please check and try again.');
   } else {
@@ -36,6 +37,7 @@ const validateForm = (event) => {
         <button type="submit" class="register">Register</button>
       </form>
     </div>
+    <Footer />
 </template>
 
 <style>
@@ -45,6 +47,7 @@ const validateForm = (event) => {
   align-items: center;
   text-align: center;
   margin-top: 50px;
+  margin-bottom: 25% !important;
 }
 
 .form-container h2 {
@@ -90,7 +93,7 @@ const validateForm = (event) => {
   transform: scale(1.05);
 }
 
-.logo {
+/* .logo {
   font-size: 2rem;
   float: left !important;
   font-family: Georgia, 'Times New Roman', Times, serif;
@@ -122,5 +125,5 @@ const validateForm = (event) => {
 
 .navbar h1 {
   font-size: 2rem;
-}
+} */
 </style>

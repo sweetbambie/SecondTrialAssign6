@@ -44,10 +44,10 @@ onMounted(async () => {
           <p class="movie-title">{{ movie.title }}</p>
         </div>
         <button v-if='!store.cart.has(movie.id)'
-          @click="store.addToCart(movie.id, { title: movie.title, url: movie.poster_path })" class="movie-site">
+          @click="store.addToCart(movie.id, { title: movie.title, url: movie.poster_path })" class="buy">
           Buy
         </button>
-        <button v-else>
+        <button v-else class = 'buy'>
           Added
         </button>
       </div>

@@ -11,20 +11,23 @@ import { RouterLink } from 'vue-router';
           <li v-if="$route.path === '/'">
             <RouterLink to="/login" class="button login">Login</RouterLink>
           </li>
-          <li v-if="$route.path === '/' || $route.path === '/login'">
+          <li v-if="$route.path === '/'">
             <RouterLink to="/register" class="button register">Register</RouterLink>
           </li>
           <li v-if="$route.path === '/movies'">
             <RouterLink to="/cart" class="button cart">Cart</RouterLink>
           </li>
-          <li v-if="$route.path === '/movies'" >
+          <li v-if="$route.path === '/movies'">
             <RouterLink to="/setting" class="button setting">Setting</RouterLink>
           </li>
-          <li v-if="$route.path !== '/'" >
+          <li v-if="$route.path === '/movies'">
             <RouterLink to="/" class="button setting">Logout</RouterLink>
           </li>
-          <li v-if="$route.path === '/setting'" >
+          <li v-if="$route.path === '/setting'">
             <RouterLink to="/movies" class="button setting">Movies</RouterLink>
+          </li>
+          <li v-if="$route.path === '/login' || $route.path === '/register'">
+            <RouterLink to="/" class="button setting">Home</RouterLink>
           </li>
         </div>
       </ul>

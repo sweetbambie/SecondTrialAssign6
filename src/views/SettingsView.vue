@@ -1,7 +1,8 @@
 <script setup>
 import { useRegistrationStore } from '../store';
 import { computed } from 'vue';
-
+import Header from '../components/Header.vue'
+import Footer from '../components/Footer.vue'
 
 const userStore = useRegistrationStore();
 const firstName = computed({
@@ -29,10 +30,7 @@ const password = computed({
   },
 });
 
-// Update profile data
 const updateProfileHandler = (event) => {
-  // Prepare the updated data from the form
-  // Call the updateProfile method from the store to save the updated data
   userStore.setRegistrationData({
     firstName: firstName.value,
     lastName: lastName.value,
@@ -40,29 +38,72 @@ const updateProfileHandler = (event) => {
     password: userStore.password.value
   });
 
-  // Show success message
   alert('Profile updated successfully!');
 }
 </script>
 
 <template>
-  <div>
+  <Header />
+  <div class="form-container">
     <h1>User Profile</h1>
-    <!-- <p> {{ userStore }}</p> -->
     <form @submit="updateProfileHandler">
       <label for="firstName">First Name:</label>
-      <input type="text" id="firstName" v-model="firstName" /><br /><br />
-
+      <input type="text" id="firstName" class="input-field" v-model="firstName" /><br /><br />
       <label for="lastName">Last Name:</label>
-      <input type="text" id="lastName" v-model="lastName" /><br /><br />
-
+      <input type="text" id="lastName" class="input-field" v-model="lastName" /><br /><br />
       <label for="email">Email:</label>
-      <input type="email" id="email" v-model="email" /><br /><br />
-
+      <input type="email" id="email" class="input-field" v-model="email" /><br /><br />
       <label for="password">Password:</label>
-      <input type="text" id="password" v-model="password" readonly/><br /><br />
-
-      <button type="submit">Save Changes</button>
+      <input type="text" id="password" class="input-field" v-model="password" readonly /><br /><br />
+      <button type="submit" class="button">Save Changes</button>
     </form>
   </div>
+  <Footer />
 </template>
+
+<style scooped>
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: 50px;
+} 
+
+.form-container form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 350px;
+} 
+
+.input-field {
+  /* padding: 15px; */
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 15px;
+  transition: border-color 0.3s;
+} 
+
+.input-field:focus {
+  border-color: hotpink;
+  outline: none;
+}
+
+.button{
+  background-color: hotpink;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.button:hover {
+  background-color: rgb(246, 151, 198);
+  transform: scale(1.05);
+} 
+</style>
